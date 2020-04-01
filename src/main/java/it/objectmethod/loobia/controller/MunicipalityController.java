@@ -16,15 +16,15 @@ import it.objectmethod.loobia.service.MunicipalityService;
 @CrossOrigin
 @RequestMapping("/api/municipality")
 public class MunicipalityController {
-	
+
 	@Autowired
 	MunicipalityService municipService;
-	
+
 	@GetMapping("/list")
 	public List<MunicipalityDto> getMunicipalities(@RequestParam(value = "municipSearched") String municipSearched) {
-		
+
 		List<MunicipalityDto> municipListDto = municipService.findByNomeStartingWith(municipSearched);
 		return municipListDto;
 	}
-	
+
 }

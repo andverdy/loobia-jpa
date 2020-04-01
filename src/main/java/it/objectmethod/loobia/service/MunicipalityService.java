@@ -23,13 +23,11 @@ public class MunicipalityService {
 	public List<MunicipalityDto> findByNomeStartingWith(String municipSearched) {
 		List<Municipality> listMunicip = municipRepo.findByNomeStartingWith(municipSearched);
 		List<MunicipalityDto> municipalitiesListDto = new ArrayList<MunicipalityDto>();
-		
+
 		for (int i = 0; i < listMunicip.size(); i++) {
 			MunicipalityDto munDto = municipMapper.toDto(listMunicip.get(i));
 			municipalitiesListDto.add(munDto);
 		}
-		
-		
 
 		return municipalitiesListDto;
 	}

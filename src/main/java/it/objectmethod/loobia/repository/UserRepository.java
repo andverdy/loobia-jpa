@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import it.objectmethod.loobia.entity.User;
 
-
 @Component
 public interface UserRepository extends JpaRepository<User, Integer> {
 
