@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.objectmethod.loobia.service.UserService;
+import it.objectmethod.loobia.service.AreaService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/user")
-public class UserController {
+@RequestMapping("/api/zona")
+public class AreaController {
 
 	@Autowired
-	private UserService userService;
+	private AreaService areaService;
 
-	@PutMapping("/codzona/save")
+	@PutMapping("/save")
 	public void censusAgents(@RequestParam(value = "codzona") String codzona,
 			@RequestParam(value = "idagente") Integer idagente) {
 
-		userService.censusAgents(codzona, idagente);
+		areaService.censusAgents(codzona, idagente);
 	}
 }
