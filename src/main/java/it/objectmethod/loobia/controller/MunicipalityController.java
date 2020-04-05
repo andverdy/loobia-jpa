@@ -18,7 +18,7 @@ import it.objectmethod.loobia.service.MunicipalityService;
 public class MunicipalityController {
 
 	@Autowired
-	MunicipalityService municipService;
+	private MunicipalityService municipService;
 
 	@GetMapping("/list")
 	public List<MunicipalityDto> getMunicipalities(@RequestParam(value = "municipSearched") String municipSearched) {

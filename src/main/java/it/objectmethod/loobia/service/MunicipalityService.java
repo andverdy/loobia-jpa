@@ -15,13 +15,13 @@ import it.objectmethod.loobia.repository.MunicipalityRepository;
 public class MunicipalityService {
 
 	@Autowired
-	MunicipalityRepository municipRepo;
+	private MunicipalityRepository municipRepo;
 
 	@Autowired
-	MunicipalityMapper municipMapper;
+	private MunicipalityMapper municipMapper;
 
 	public List<MunicipalityDto> findByNomeStartingWith(String municipSearched) {
-		List<Municipality> listMunicip = municipRepo.findByNomeStartingWith(municipSearched);
+		List<Municipality> listMunicip = municipRepo.searchByNomeStartsWith(municipSearched);
 		List<MunicipalityDto> municipalitiesListDto = new ArrayList<MunicipalityDto>();
 
 		for (int i = 0; i < listMunicip.size(); i++) {
@@ -33,10 +33,3 @@ public class MunicipalityService {
 	}
 
 }
-/*
- * List<ArticleDTO> articlesListDto = new ArrayList<ArticleDTO>(); for (Article
- * e : articlesList) { ArticleDTO articleDto = articleMapper.toDto(e);
- * articlesListDto.add(articleDto); }
- * 
- * return articlesListDto;
- */

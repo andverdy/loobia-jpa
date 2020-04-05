@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.objectmethod.loobia.dto.UserDto;
+import it.objectmethod.loobia.entity.User;
 import it.objectmethod.loobia.service.TokenService;
 import it.objectmethod.loobia.service.UserService;
 
@@ -36,15 +37,22 @@ public class LoginController {
 		String ret = "";
 		log.info("Login Request with name " + email);
 
-		UserDto userDto = userService.findByUsernameAndPassword(email, password);
-
-		if (userDto != null) {
+		//UserDto userDto = userService.findByUsernameAndPassword(email, password);
+		User user = userService.findByUsernameAndPassword(email, password);
+		if (user != null) {
 			ret = tokenService.getToken(email);
 			resp = new ResponseEntity<>(ret, HttpStatus.OK);
 		} else {
 
 			resp = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+//		if (userDto != null) {
+//			ret = tokenService.getToken(email);
+//			resp = new ResponseEntity<>(ret, HttpStatus.OK);
+//		} else {
+//
+//			resp = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//		}
 		return resp;
 	}
 

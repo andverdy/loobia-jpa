@@ -2,18 +2,18 @@ package it.objectmethod.loobia.dto;
 
 public class UserDto {
 
-	private Integer id;
+	private Integer idutente;
 	private String name;
 	private String email;
 	private String role;
 	private String password;
 
-	public Integer getId() {
-		return id;
+	public Integer getIdutente() {
+		return idutente;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdutente(Integer idutente) {
+		this.idutente = idutente;
 	}
 
 	public String getName() {

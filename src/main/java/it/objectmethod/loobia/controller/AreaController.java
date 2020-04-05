@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.objectmethod.loobia.dto.AreaDto;
 import it.objectmethod.loobia.service.AreaService;
 
 @RestController
@@ -18,9 +19,11 @@ public class AreaController {
 	private AreaService areaService;
 
 	@PutMapping("/save")
-	public void censusAgents(@RequestParam(value = "codzona") String codzona,
+	public AreaDto censusAgents(@RequestParam(value = "codzona") String codzona,
 			@RequestParam(value = "idagente") Integer idagente) {
 
-		areaService.censusAgents(codzona, idagente);
+		AreaDto areaDto = areaService.censusAgents(codzona, idagente);
+
+		return areaDto;
 	}
 }

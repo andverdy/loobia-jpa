@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -12,13 +14,15 @@ import javax.persistence.Table;
 public class Area {
 
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
 	@Column(name = "codzona")
 	private String codzona;
-	@Column(name = "idagente")
-	private Integer idagente;
+
+	@ManyToOne
+	@JoinColumn(name = "id_agente")
+	private User user;
 
 	public Integer getId() {
 		return id;
@@ -36,12 +40,12 @@ public class Area {
 		this.codzona = codzona;
 	}
 
-	public Integer getIdagente() {
-		return idagente;
+	public User getUser() {
+		return user;
 	}
 
-	public void setIdagente(Integer idagente) {
-		this.idagente = idagente;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

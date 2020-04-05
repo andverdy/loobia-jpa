@@ -23,7 +23,7 @@ public class TokenServiceImpl implements TokenService {
 
 	@Override
 	public String getToken(String email) {
-		log.info("Genero token con c<hiave " + SECRET);
+		log.info("Genero token con chiave " + SECRET);
 		// HMAC
 		String token = null;
 		try {

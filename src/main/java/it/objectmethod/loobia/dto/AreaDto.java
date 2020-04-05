@@ -4,7 +4,7 @@ public class AreaDto {
 
 	private Integer id;
 	private String codzona;
-	private Integer idagente;
+	private Integer id_agente;
 
 	public Integer getId() {
 		return id;
@@ -22,12 +22,12 @@ public class AreaDto {
 		this.codzona = codzona;
 	}
 
-	public Integer getIdagente() {
-		return idagente;
+	public Integer getId_agente() {
+		return id_agente;
 	}
 
-	public void setIdagente(Integer idagente) {
-		this.idagente = idagente;
+	public void setId_agente(Integer id_agente) {
+		this.id_agente = id_agente;
 	}
 
 }
