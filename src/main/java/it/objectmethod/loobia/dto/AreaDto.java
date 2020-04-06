@@ -3,8 +3,8 @@ package it.objectmethod.loobia.dto;
 public class AreaDto {
 
 	private Integer id;
-	private String codzona;
-	private Integer id_agente;
+	private String codZona;
+	private Integer idAgente;
 
 	public Integer getId() {
 		return id;
@@ -14,20 +14,20 @@ public class AreaDto {
 		this.id = id;
 	}
 
-	public String getCodzona() {
-		return codzona;
+	public String getCodZona() {
+		return codZona;
 	}
 
-	public void setCodzona(String codzona) {
-		this.codzona = codzona;
+	public void setCodZona(String codZona) {
+		this.codZona = codZona;
 	}
 
-	public Integer getId_agente() {
-		return id_agente;
+	public Integer getIdAgente() {
+		return idAgente;
 	}
 
-	public void setId_agente(Integer id_agente) {
-		this.id_agente = id_agente;
+	public void setIdAgente(Integer idAgente) {
+		this.idAgente = idAgente;
 	}
 
 }

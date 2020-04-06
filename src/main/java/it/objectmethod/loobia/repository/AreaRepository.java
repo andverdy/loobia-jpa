@@ -8,6 +8,6 @@ import it.objectmethod.loobia.entity.Area;
 @Component
 public interface AreaRepository extends JpaRepository<Area, Integer> {
 
-	Area findByCodzona(String codzona);
+	Area findByCodZona(String codZona);
 
 }

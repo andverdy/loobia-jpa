@@ -10,7 +10,7 @@ public class CustomerDto {
 	private String bancaAppoggio;
 	private String abi;
 	private String cab;
-	private String codiceZona;
+	private String codZona;
 	private String codiceCliente;
 	private char stato;
 	private String cellulare;
@@ -90,12 +90,12 @@ public class CustomerDto {
 		this.cab = cab;
 	}
 
-	public String getCodiceZona() {
-		return codiceZona;
+	public String getCodZona() {
+		return codZona;
 	}
 
-	public void setCodiceZona(String codiceZona) {
-		this.codiceZona = codiceZona;
+	public void setCodZona(String codZona) {
+		this.codZona = codZona;
 	}
 
 	public String getCodiceCliente() {

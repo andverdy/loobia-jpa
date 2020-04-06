@@ -2,6 +2,8 @@ package it.objectmethod.loobia.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,6 +12,7 @@ import javax.persistence.Table;
 public class Customer {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
 	@Column(name = "ragione_sociale")
@@ -27,7 +30,7 @@ public class Customer {
 	@Column(name = "cab")
 	private String cab;
 	@Column(name = "codice_zona")
-	private String codiceZona;
+	private String codZona;
 	@Column(name = "codice_cliente")
 	private String codiceCliente;
 	@Column(name = "stato")
@@ -121,12 +124,12 @@ public class Customer {
 		this.cab = cab;
 	}
 
-	public String getCodiceZona() {
-		return codiceZona;
+	public String getCodZona() {
+		return codZona;
 	}
 
-	public void setCodiceZona(String codiceZona) {
-		this.codiceZona = codiceZona;
+	public void setCodZona(String codZona) {
+		this.codZona = codZona;
 	}
 
 	public String getCodiceCliente() {

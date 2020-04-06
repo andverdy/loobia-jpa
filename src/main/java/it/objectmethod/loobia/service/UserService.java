@@ -21,10 +21,9 @@ public class UserService {
 	public User findByUsernameAndPassword(String email, String password) {
 
 		User user = userRepo.findByEmailAndPassword(email, password);
-		//UserDto userDto = userMapper.toDto(user);
-		//return userDto;
+		// UserDto userDto = userMapper.toDto(user);
+		// return userDto;
 		return user;
 	}
-	
 
 }

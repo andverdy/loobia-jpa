@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class User {
 
 	@Id
-	private Integer idutente;
+	private Integer idUtente;
 
 	@Column(name = "name")
 	private String name;
@@ -25,7 +25,7 @@ public class User {
 	private String password;
 
 	@OneToMany(mappedBy = "user")
-	private List<Area> zone;
+	private List<Area> areas;
 
 	public String getName() {
 		return name;
@@ -59,12 +59,20 @@ public class User {
 		this.password = password;
 	}
 
-	public Integer getIdutente() {
-		return idutente;
+	public Integer getIdUtente() {
+		return idUtente;
 	}
 
-	public void setIdutente(Integer idutente) {
-		this.idutente = idutente;
+	public void setIdUtente(Integer idUtente) {
+		this.idUtente = idUtente;
+	}
+
+	public List<Area> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
 	}
 
 }

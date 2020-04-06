@@ -46,73 +46,30 @@ public class AuthenticationFilter implements Filter {
 			String email = tokenService.getEmail(token);
 			User user = userRepo.findByEmail(email);
 
-			String path = req.getRequestURI().replace("/v1", "");
+			boolean authorized = false;
 
 			if (email != null) {
 				if (user.getRole().equals("AGENT")) {
-					switch (path) {
-					case "/loobia/api/customer/save": {
-
-						if (email != null) {
-
-							req.setAttribute("email", email);
-							LOG.info(String.format("Utente autorizzato %s a procedere verso %s", email,
-									req.getRequestURI()));
-							chain.doFilter(req, response);
-						}
-						break;
-					}
-					default: {
-						LOG.info("Denied access to " + req.getRequestURI());
-						((HttpServletResponse) response).setStatus(HttpStatus.UNAUTHORIZED.value());
-						break;
-					}
+					if (url.contains("api/customer") || url.contains("api/municipality")) {
+						authorized = true;
 					}
 				} else if (user.getRole().equals("ADMIN")) {
-					switch (path) {
-					case "/loobia/api/zona/save": {
-						req.setAttribute("email", email);
-						LOG.info(String.format("Utente autorizzato %s a procedere verso %s", email,
-								req.getRequestURI()));
-						chain.doFilter(req, response);
-						break;
-					}
-
-					default: {
-						LOG.info("Denied access to " + req.getRequestURI());
-						((HttpServletResponse) response).setStatus(HttpStatus.UNAUTHORIZED.value());
-						break;
-					}
+					if (url.contains("api/zona") || url.contains("api/municipality")) {
+						authorized = true;
 					}
 				}
+			}
+
+			if (authorized) {
+				req.setAttribute("email", email);
+				LOG.info(String.format("Utente autorizzato %s a procedere verso %s", email, req.getRequestURI()));
+				chain.doFilter(req, response);
 			} else {
 				LOG.info("Denied access to " + req.getRequestURI());
 				((HttpServletResponse) response).setStatus(HttpStatus.UNAUTHORIZED.value());
 			}
 
-//			if (tokenService.getEmail(token) != null) {
-//				String email = tokenService.getEmail(token);
-//
-//				if (url.endsWith("/save")) {
-//					User user = userRepo.findByEmail(email);
-//					if (user.getRole().equals("AGENT")) {
-//						req.setAttribute("email", email);
-//						chain.doFilter(req, response);
-//						LOG.info(String.format("Utente autorizzato %s a procedere verso %s", email,
-//								req.getRequestURI()));
-//
-//					} else {
-//						((HttpServletResponse) response).setStatus(HttpStatus.UNAUTHORIZED.value());
-//					}
-//				}
-//
-//			} else {
-//
-//				LOG.info("Denied access to " + req.getRequestURI());
-//				((HttpServletResponse) response).setStatus(HttpStatus.UNAUTHORIZED.value());
-//			}
 		}
-
 		LOG.info("Committing a transaction for req : {}" + req.getRequestURI());
 	}
 

@@ -19,10 +19,10 @@ public class AreaController {
 	private AreaService areaService;
 
 	@PutMapping("/save")
-	public AreaDto censusAgents(@RequestParam(value = "codzona") String codzona,
-			@RequestParam(value = "idagente") Integer idagente) {
+	public AreaDto censusAgents(@RequestParam(value = "codZona") String codZona,
+			@RequestParam(value = "idAgente") Integer idAgente) {
 
-		AreaDto areaDto = areaService.censusAgents(codzona, idagente);
+		AreaDto areaDto = areaService.censusAgents(codZona, idAgente);
 
 		return areaDto;
 	}

@@ -24,8 +24,6 @@ public class CustomerController {
 	@PutMapping("/save")
 	public CustomerDto customerSave(HttpServletRequest request, @RequestBody Customer customer) {
 		String email = (String) request.getAttribute("email");
-		System.out.println(email);
-
 		return custService.customerSave(customer, email);
 
 	}

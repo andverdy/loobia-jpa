@@ -17,8 +17,8 @@ public class Area {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	@Column(name = "codzona")
-	private String codzona;
+	@Column(name = "codice_zona")
+	private String codZona;
 
 	@ManyToOne
 	@JoinColumn(name = "id_agente")
@@ -32,12 +32,12 @@ public class Area {
 		this.id = id;
 	}
 
-	public String getCodzona() {
-		return codzona;
+	public String getCodZona() {
+		return codZona;
 	}
 
-	public void setCodzona(String codzona) {
-		this.codzona = codzona;
+	public void setCodZona(String codZona) {
+		this.codZona = codZona;
 	}
 
 	public User getUser() {

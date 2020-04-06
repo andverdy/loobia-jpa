@@ -23,7 +23,7 @@ public class Municipality {
 	@Column(name = "cap")
 	private String cap;
 	@Column(name = "cod_fisco")
-	private String cod_fisco;
+	private String codFisco;
 	@Column(name = "abitanti")
 	private Integer abitanti;
 	@Column(name = "link")
@@ -77,12 +77,12 @@ public class Municipality {
 		this.cap = cap;
 	}
 
-	public String getCod_fisco() {
-		return cod_fisco;
+	public String getCodFisco() {
+		return codFisco;
 	}
 
-	public void setCod_fisco(String cod_fisco) {
-		this.cod_fisco = cod_fisco;
+	public void setCodFisco(String codFisco) {
+		this.codFisco = codFisco;
 	}
 
 	public Integer getAbitanti() {

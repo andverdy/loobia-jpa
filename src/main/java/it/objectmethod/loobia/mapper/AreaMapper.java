@@ -11,8 +11,8 @@ import it.objectmethod.loobia.entity.Area;
 public interface AreaMapper extends EntityMapper<AreaDto, Area> {
 
 	@Mapping(source = "id", target = "id")
-	@Mapping(source = "codzona", target = "codzona")
-	@Mapping(source = "user.idutente", target = "id_agente")
+	@Mapping(source = "codZona", target = "codZona")
+	@Mapping(source = "user.idUtente", target = "idAgente")
 	AreaDto toDto(Area area);
 
 }
