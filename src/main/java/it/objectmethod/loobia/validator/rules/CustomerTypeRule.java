@@ -14,7 +14,10 @@ public class CustomerTypeRule implements IValidatorRule {
 		Customer customer = (Customer) paramsToValidate.get("customer");
 		if (customer.getTipo() != null && customer.getTipo().equals("PG") && customer.getPartitaIva().isEmpty()) {
 			errors.add("Il Campo Partita Iva è obbligatorio!");
+		} else if (customer.getTipo().isEmpty()) {
+			errors.add("Campo Tipo Mancante!");
 		}
+
 	}
 
 }

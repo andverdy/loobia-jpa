@@ -14,7 +14,8 @@ public class CustomerVatRule implements IValidatorRule {
 	public void validate(Map<String, Object> paramsToValidate) {
 		List<String> errors = (List<String>) paramsToValidate.get("errList");
 		Customer customer = (Customer) paramsToValidate.get("customer");
-		if (customer.getPartitaIva() != null && pIvaValidate(customer.getPartitaIva())) {
+		if (customer.getPartitaIva() != null && pIvaValidate(customer.getPartitaIva())
+				|| customer.getPartitaIva().isEmpty()) {
 		} else {
 			errors.add("Formato partita iva errato!");
 		}
