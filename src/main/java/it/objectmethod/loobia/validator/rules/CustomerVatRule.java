@@ -8,23 +8,24 @@ import java.util.regex.Pattern;
 import it.objectmethod.loobia.entity.Customer;
 
 @SuppressWarnings("unchecked")
-public class CustomerFiscalCodeRule implements IValidatorRule {
+public class CustomerVatRule implements IValidatorRule {
 
 	@Override
 	public void validate(Map<String, Object> paramsToValidate) {
-
 		List<String> errors = (List<String>) paramsToValidate.get("errList");
 		Customer customer = (Customer) paramsToValidate.get("customer");
-		if (customer.getCodiceFiscale() != null && !(fiscalCodeValidate(customer.getCodiceFiscale()))) {
-			errors.add("Formato codice fiscale errato!");
+		if (customer.getPartitaIva() != null && pIvaValidate(customer.getPartitaIva())) {
+		} else {
+			errors.add("Formato partita iva errato!");
 		}
 	}
 
-	private boolean fiscalCodeValidate(String fiscalCode) {
-		String regex = "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$";
+	private boolean pIvaValidate(String pIva) {
+		String regex = "[0-9]{11}";
+
 		Pattern p = Pattern.compile(regex);
 
-		Matcher m = p.matcher(fiscalCode);
+		Matcher m = p.matcher(pIva);
 		if (m.matches()) {
 			return true;
 		} else {

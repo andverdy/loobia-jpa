@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import it.objectmethod.loobia.dto.CustomerDto;
 import it.objectmethod.loobia.entity.Customer;
+import it.objectmethod.loobia.repository.MunicipalityRepository;
 import it.objectmethod.loobia.service.CustomerService;
 import it.objectmethod.loobia.validators.CustomerValidator;
 
@@ -25,15 +26,18 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService custService;
-	
+
 	@Autowired
 	private CustomerValidator customerValidator;
+
+	@Autowired
+	private MunicipalityRepository municRepo;
 
 	@PutMapping("/save")
 	public CustomerDto customerSave(HttpServletRequest request, @RequestBody Customer customer) {
 		String email = (String) request.getAttribute("email");
-		List<String> errors = customerValidator.validateCustomer(customer);
-		if((!errors.isEmpty())) {
+		List<String> errors = customerValidator.validateCustomer(customer, municRepo);
+		if ((!errors.isEmpty())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, errors.toString());
 		}
 		return custService.customerSave(customer, email);
@@ -41,16 +45,3 @@ public class CustomerController {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
