@@ -1,10 +1,13 @@
 package it.objectmethod.loobia.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -59,6 +62,9 @@ public class Customer {
 	private String note;
 	@Column(name = "email")
 	private String email;
+
+	@OneToMany(mappedBy = "customer")
+	private List<CustomerAddresses> customerAddresses;
 
 	public Integer getId() {
 		return id;
@@ -242,6 +248,14 @@ public class Customer {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<CustomerAddresses> getCustomerAddresses() {
+		return customerAddresses;
+	}
+
+	public void setCustomerAddresses(List<CustomerAddresses> customerAddresses) {
+		this.customerAddresses = customerAddresses;
 	}
 
 }

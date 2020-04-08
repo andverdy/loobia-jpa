@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Component;
 
-import it.objectmethod.loobia.dto.UserDto;
 import it.objectmethod.loobia.entity.User;
 //import it.objectmethod.loobia.mapper.UserMapper;
 import it.objectmethod.loobia.repository.UserRepository;

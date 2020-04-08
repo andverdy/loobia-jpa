@@ -50,7 +50,7 @@ public class AuthenticationFilter implements Filter {
 
 			if (email != null) {
 				if (user.getRole().equals("AGENT")) {
-					if (url.contains("api/customer") || url.contains("api/municipality")) {
+					if (url.contains("api/customer") || url.contains("api/municipality") || url.contains("api/customer_addresses")) {
 						authorized = true;
 					}
 				} else if (user.getRole().equals("ADMIN")) {
@@ -59,7 +59,7 @@ public class AuthenticationFilter implements Filter {
 					}
 				}
 			}
-
+//loobia/api/customer_addresses/by_id
 			if (authorized) {
 				req.setAttribute("email", email);
 				LOG.info(String.format("Utente autorizzato %s a procedere verso %s", email, req.getRequestURI()));
