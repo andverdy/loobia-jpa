@@ -5,21 +5,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Component;
-import it.objectmethod.loobia.entity.CustomerAddresses;
+
+import it.objectmethod.loobia.dto.CustomerAddressesDto;
+import it.objectmethod.loobia.repository.AreaRepository;
+import it.objectmethod.loobia.repository.CustomerAddressesRepository;
+import it.objectmethod.loobia.repository.CustomerRepository;
 import it.objectmethod.loobia.repository.MunicipalityRepository;
-import it.objectmethod.loobia.validator.rules.CustomerAddressesRule;
+import it.objectmethod.loobia.repository.UserRepository;
+import it.objectmethod.loobia.validator.rules.CustomerAddressesCityRule;
+import it.objectmethod.loobia.validator.rules.CustomerAddressesInvoiceRule;
+import it.objectmethod.loobia.validator.rules.UserPermissionsManipulationAddressRules;
 
 @Component
 public class CustomerAddressesValidator {
 
-	public List<String> validateCustomerAddress(CustomerAddresses customerAddress, MunicipalityRepository municipalityRepo) {
+	public List<String> validateCustomerAddress(AreaRepository areRepo, CustomerRepository customerRepo,
+			UserRepository userRepo, String email, CustomerAddressesDto customerAddressDto,
+			MunicipalityRepository municipalityRepo, CustomerAddressesRepository customerAddressesRepo) {
 		List<String> errors = new ArrayList<String>();
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("customerAddress", customerAddress);
+		params.put("customerAddressDto", customerAddressDto);
 		params.put("errList", errors);
 		params.put("municipalityRepo", municipalityRepo);
+		params.put("customerAddressesRepo", customerAddressesRepo);
+		params.put("email", email);
+		params.put("userRepo", userRepo);
+		params.put("custRepo", customerRepo);
+		params.put("areRepository", areRepo);
 
-		new CustomerAddressesRule().validate(params);
+		new CustomerAddressesCityRule().validate(params);
+		new UserPermissionsManipulationAddressRules().validate(params);
+		new CustomerAddressesInvoiceRule().validate(params);
 
 		return errors;
 	}

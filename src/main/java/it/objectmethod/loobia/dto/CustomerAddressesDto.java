@@ -1,40 +1,16 @@
-package it.objectmethod.loobia.entity;
+package it.objectmethod.loobia.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+public class CustomerAddressesDto {
 
-@Entity
-@Table(name = "indirizzi_cliente")
-public class CustomerAddresses {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	// @JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "id_cliente")
-	private Customer customer;
-	@Column(name = "indirizzo")
+	private Integer idCliente;
 	private String indirizzo;
-	@Column(name = "citta")
 	private String citta;
-	@Column(name = "cap")
 	private String cap;
-	@Column(name = "provincia")
 	private String provincia;
-	@Column(name = "nazione")
 	private String nazione;
-	@Column(name = "fatturazione")
 	private Boolean fatturazione;
-	@Column(name = "destinatario")
 	private String destinatario;
-	@Column(name = "attivo")
 	private Boolean attivo;
 
 	public Integer getId() {
@@ -45,12 +21,12 @@ public class CustomerAddresses {
 		this.id = id;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Integer getIdCliente() {
+		return idCliente;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getIndirizzo() {

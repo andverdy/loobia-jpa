@@ -23,9 +23,7 @@ public class CustomerVatRule implements IValidatorRule {
 
 	private boolean pIvaValidate(String pIva) {
 		String regex = "[0-9]{11}";
-
 		Pattern p = Pattern.compile(regex);
-
 		Matcher m = p.matcher(pIva);
 		if (m.matches()) {
 			return true;

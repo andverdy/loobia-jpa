@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "cliente")
 public class Customer {
@@ -63,6 +65,7 @@ public class Customer {
 	@Column(name = "email")
 	private String email;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "customer")
 	private List<CustomerAddresses> customerAddresses;
 
