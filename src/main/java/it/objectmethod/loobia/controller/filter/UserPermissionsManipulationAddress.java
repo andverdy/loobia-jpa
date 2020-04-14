@@ -1,26 +1,38 @@
-package it.objectmethod.loobia.validator.rules;
+package it.objectmethod.loobia.controller.filter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import it.objectmethod.loobia.dto.CustomerAddressesDto;
 import it.objectmethod.loobia.entity.User;
 import it.objectmethod.loobia.repository.AreaRepository;
 import it.objectmethod.loobia.repository.CustomerRepository;
 import it.objectmethod.loobia.repository.UserRepository;
 
-@SuppressWarnings("unchecked")
-public class UserPermissionsManipulationAddressRules implements IValidatorRule {
+@Component
+public class UserPermissionsManipulationAddress {
 
-	@Override
-	public void validate(Map<String, Object> paramsToValidate) {
-		List<String> errors = (List<String>) paramsToValidate.get("errList");
-		String email = (String) paramsToValidate.get("email");
-		UserRepository userRepo = (UserRepository) paramsToValidate.get("userRepo");
-		CustomerAddressesDto customerAddresDto = (CustomerAddressesDto) paramsToValidate.get("customerAddressDto");
-		CustomerRepository custRepo = (CustomerRepository) paramsToValidate.get("custRepo");
-		AreaRepository areaRepo = (AreaRepository) paramsToValidate.get("areRepository");
+	@Autowired
+	private UserRepository userRepo;
+
+	@Autowired
+	private CustomerRepository custRepo;
+
+	@Autowired
+	private AreaRepository areaRepo;
+
+	public String usersPermissionCheck(HttpServletRequest request, CustomerAddressesDto customerAddresDto) {
+
+		String email = (String) request.getAttribute("email");
+		String message = null;
+
 		boolean customerIdUserLoginExist = false;
 		Map<String, List<Integer>> allCodZonaUserMap = new HashMap<String, List<Integer>>();
 
@@ -35,7 +47,7 @@ public class UserPermissionsManipulationAddressRules implements IValidatorRule {
 		}
 
 		if (listCustomerIdUserLogin != null && listCustomerIdUserLogin.isEmpty()) {
-			errors.add("L'utente non ha ancora aggiunto nessun indirizzo cliente!");
+			message = "L'utente non ha ancora aggiunto nessun indirizzo cliente!";
 		} else if (!listCustomerIdUserLogin.isEmpty()) {
 
 			for (Map.Entry<String, List<Integer>> entry : allCodZonaUserMap.entrySet()) {
@@ -51,8 +63,9 @@ public class UserPermissionsManipulationAddressRules implements IValidatorRule {
 				}
 			}
 			if (customerIdUserLoginExist == false) {
-				errors.add("L'utente non ha un cliente con questo id!");
+				message = "L'utente non ha un cliente con questo id!";
 			}
 		}
+		return message;
 	}
 }

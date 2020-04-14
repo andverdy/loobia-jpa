@@ -19,11 +19,11 @@ public class CustomerAddressesCityRule implements IValidatorRule {
 
 		Municipality municipality = municipRepo.findByNome(customAddressDto.getCitta());
 
-		String capInserito = customAddressDto.getCap();
-
-		if (municipality != null && customAddressDto != null) {
-			String capMunicRepo = municipality.getCap();
-			if (!(splitCap(capInserito, capMunicRepo))) {
+		if (municipality != null) {
+			String cap = municipality.getCap();
+			cap = cap.replaceAll("x", "");
+			if (customAddressDto.getCap() == null || (cap.length() == 5 && !customAddressDto.getCap().equals(cap))
+					|| (cap.length() < 5 && !customAddressDto.getCap().startsWith(cap))) {
 				errors.add("Il Cap inserito è errato!");
 			}
 			if (!(customAddressDto.getProvincia().equals(municipality.getProvincia()))) {
@@ -31,31 +31,6 @@ public class CustomerAddressesCityRule implements IValidatorRule {
 			}
 		} else {
 			errors.add("La Città inserita è errata!");
-		}
-
-	}
-
-	private boolean splitCap(String capInseritoParam, String capMunicipalityParam) {
-		String capMuniciSplittato = "";
-		String capInseritoSplittato = "";
-		int qntX = 0;
-
-		for (int i = 0; i < capMunicipalityParam.length(); i++) {
-			if (capMunicipalityParam.charAt(i) == 'x') {
-				qntX++;
-			}
-		}
-		int lunghezzaCapMunicp = capMunicipalityParam.length();
-		int numCaratteriRimanenti = lunghezzaCapMunicp - qntX;
-
-		for (int i = 0; i < numCaratteriRimanenti; i++) {
-			capMuniciSplittato += capMunicipalityParam.charAt(i);
-			capInseritoSplittato += capInseritoParam.charAt(i);
-		}
-		if (capMuniciSplittato.equals(capInseritoSplittato)) {
-			return true;
-		} else {
-			return false;
 		}
 
 	}

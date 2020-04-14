@@ -22,9 +22,9 @@ public interface CustomerAddressesRepository extends JpaRepository<CustomerAddre
 	CustomerAddresses findCustomerAddressesByIdAndFatturazione(@Param("id") Integer id,
 			@Param("fatturazione") boolean fatturazione);
 
-	@Modifying
-	@Query(value = "UPDATE indirizzi_cliente SET fatturazione = FALSE WHERE id = :id", nativeQuery = true)
-	Integer updateCustomerAddressesById(@Param("id") Integer id);
+//	@Modifying
+//	@Query(value = "UPDATE indirizzi_cliente SET fatturazione = FALSE WHERE id = :id", nativeQuery = true)
+//	Integer updateCustomerAddressesById(@Param("id") Integer id);
 
 	@Query(value = "select max(id) as max from indirizzi_cliente;", nativeQuery = true)
 	Integer searchMaxId();

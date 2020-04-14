@@ -2,7 +2,6 @@ package it.objectmethod.loobia.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import it.objectmethod.loobia.dto.CustomerAddressesDto;
 import it.objectmethod.loobia.entity.Customer;
 import it.objectmethod.loobia.entity.CustomerAddresses;
@@ -24,6 +23,7 @@ public class CustomerAddressesService {
 	}
 
 	public CustomerAddressesDto customerAddressSave(CustomerAddressesDto customerAddressDto) {
+
 		CustomerAddresses customerAddress = new CustomerAddresses();
 		Customer customer = new Customer();
 
@@ -39,7 +39,6 @@ public class CustomerAddressesService {
 		customerAddress.setDestinatario(customerAddressDto.getDestinatario());
 		customerAddress.setAttivo(customerAddressDto.getAttivo());
 		customerAddress.setFatturazione(customerAddressDto.getFatturazione());
-		
 
 		CustomerAddresses customerAddressSaved = custAddrRepo.save(customerAddress);
 		return custAddrMapp.toDto(customerAddressSaved);

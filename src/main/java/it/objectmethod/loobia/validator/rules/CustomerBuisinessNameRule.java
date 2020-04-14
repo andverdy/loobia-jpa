@@ -6,18 +6,16 @@ import java.util.Map;
 import it.objectmethod.loobia.entity.Customer;
 
 @SuppressWarnings("unchecked")
-public class CustomerTypeRule implements IValidatorRule {
+public class CustomerBuisinessNameRule implements IValidatorRule {
 
 	@Override
 	public void validate(Map<String, Object> paramsToValidate) {
+
 		List<String> errors = (List<String>) paramsToValidate.get("errList");
 		Customer customer = (Customer) paramsToValidate.get("customer");
-		if (customer.getTipo() != null && customer.getTipo().equals("PG") && customer.getPartitaIva().isEmpty()) {
-			errors.add("Il Campo Partita Iva è obbligatorio!");
-		} else if (customer.getTipo().isEmpty()) {
-			errors.add("Campo Tipo Mancante!");
+		if (customer.getRagioneSociale().equals("") || customer.getRagioneSociale() == null) {
+			errors.add("Il campo Ragione Sociale non può essere vuoto!");
 		}
-
 	}
 
 }
