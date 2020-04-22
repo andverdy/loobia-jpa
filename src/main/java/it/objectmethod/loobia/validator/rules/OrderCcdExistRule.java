@@ -3,19 +3,19 @@ package it.objectmethod.loobia.validator.rules;
 import java.util.List;
 import java.util.Map;
 
-import it.objectmethod.loobia.entity.CommissionCopy;
+import it.objectmethod.loobia.entity.Order;
 
 @SuppressWarnings("unchecked")
-public class CommissionCopyCcdExistRule implements IValidatorRule {
+public class OrderCcdExistRule implements IValidatorRule {
 
 	@Override
 	public void validate(Map<String, Object> paramsToValidate) {
 
 		List<String> errors = (List<String>) paramsToValidate.get("errList");
-		CommissionCopy cC = (CommissionCopy) paramsToValidate.get("commissionCopy");
+		Order order = (Order) paramsToValidate.get("order");
 
-		if (cC != null) {
-			if (cC.getCommissionDetailCopy() == null || cC.getCommissionDetailCopy().isEmpty()) {
+		if (order != null) {
+			if (order.getDetailOrders() == null || order.getDetailOrders().isEmpty()) {
 				errors.add("Errore, deve esistere almeno una CCD");
 			}
 		}

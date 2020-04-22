@@ -1,17 +1,48 @@
-package it.objectmethod.loobia.dto;
+package it.objectmethod.loobia.entity;
 
-public class CommissionDetailCopyDto {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity
+@Table(name = "copia_commissione_dettaglio")
+public class OrderDetails {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Integer id;
+	@Column(name = "sconto")
 	private Integer sconto;
+	@Column(name = "tot_pezzi")
 	private Integer totPezzi;
-	private Integer idProdotto;
+
+	@ManyToOne()
+	@JoinColumn(name = "id_prodotto")
+	private Product product;
+
+	@Column(name = "prezzo_singolo")
 	private Float prezzoSingolo;
+	@Column(name = "importo")
 	private Double importo;
+	@Column(name = "importo_scontato")
 	private Double importoScontato;
+	@Column(name = "evaso")
 	private Integer evaso;
+	@Column(name = "pezzi_inviati")
 	private Integer pezziInviati;
-	private Integer idCopiaCommissione;
+
+	@JsonBackReference
+	@ManyToOne()
+	@JoinColumn(name = "id_copia_commissione")
+	private Order order;
 
 	public Integer getId() {
 		return id;
@@ -37,12 +68,12 @@ public class CommissionDetailCopyDto {
 		this.totPezzi = totPezzi;
 	}
 
-	public Integer getIdProdotto() {
-		return idProdotto;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setIdProdotto(Integer idProdotto) {
-		this.idProdotto = idProdotto;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public Float getPrezzoSingolo() {
@@ -85,12 +116,13 @@ public class CommissionDetailCopyDto {
 		this.pezziInviati = pezziInviati;
 	}
 
-	public Integer getIdCopiaCommissione() {
-		return idCopiaCommissione;
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setIdCopiaCommissione(Integer idCopiaCommissione) {
-		this.idCopiaCommissione = idCopiaCommissione;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
+	
 
 }

@@ -3,9 +3,9 @@ package it.objectmethod.loobia.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
-import it.objectmethod.loobia.entity.CommissionDetailCopy;
+import it.objectmethod.loobia.entity.OrderDetails;
 
 @Component
-public interface CommissionCopyDetailRepository extends JpaRepository<CommissionDetailCopy, Integer> {
+public interface CommissionCopyDetailRepository extends JpaRepository<OrderDetails, Integer> {
 
 }

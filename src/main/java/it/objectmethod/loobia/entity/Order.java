@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,7 +21,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "copia_commissione")
-public class CommissionCopy {
+public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,14 +31,20 @@ public class CommissionCopy {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "data")
 	private Date data;
-	@Column(name = "id_cliente")
-	private Integer idCliente;
+
+	@ManyToOne()
+	@JoinColumn(name = "id_cliente")
+	private Customer customerOrder;
+
 	@Column(name = "note")
 	private String note;
 	@Column(name = "stato")
 	private Byte stato;
-	@Column(name = "id_condizioni_pagamento")
-	private Long idCondizioniPagamento;
+
+	@ManyToOne()
+	@JoinColumn(name = "id_condizioni_pagamento")
+	private PaymentConditions paymentConditions;
+
 	@Column(name = "numero")
 	private Integer numero;
 	@Column(name = "mezzo_consegna_vettore")
@@ -59,8 +67,8 @@ public class CommissionCopy {
 	private Float spesaIncasso;
 
 	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "commissionCopy")
-	private List<CommissionDetailCopy> commissionDetailCopy;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "order")
+	private List<OrderDetails> detailOrders;
 
 	public Integer getId() {
 		return id;
@@ -78,12 +86,12 @@ public class CommissionCopy {
 		this.data = data;
 	}
 
-	public Integer getIdCliente() {
-		return idCliente;
+	public Customer getCustomerOrder() {
+		return customerOrder;
 	}
 
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
+	public void setCustomerOrder(Customer customerOrder) {
+		this.customerOrder = customerOrder;
 	}
 
 	public String getNote() {
@@ -102,12 +110,12 @@ public class CommissionCopy {
 		this.stato = stato;
 	}
 
-	public Long getIdCondizioniPagamento() {
-		return idCondizioniPagamento;
+	public PaymentConditions getPaymentConditions() {
+		return paymentConditions;
 	}
 
-	public void setIdCondizioniPagamento(Long idCondizioniPagamento) {
-		this.idCondizioniPagamento = idCondizioniPagamento;
+	public void setPaymentConditions(PaymentConditions paymentConditions) {
+		this.paymentConditions = paymentConditions;
 	}
 
 	public Integer getNumero() {
@@ -190,12 +198,12 @@ public class CommissionCopy {
 		this.spesaIncasso = spesaIncasso;
 	}
 
-	public List<CommissionDetailCopy> getCommissionDetailCopy() {
-		return commissionDetailCopy;
+	public List<OrderDetails> getDetailOrders() {
+		return detailOrders;
 	}
 
-	public void setCommissionDetailCopy(List<CommissionDetailCopy> commissionDetailCopy) {
-		this.commissionDetailCopy = commissionDetailCopy;
+	public void setDetailOrders(List<OrderDetails> detailOrders) {
+		this.detailOrders = detailOrders;
 	}
 
 }

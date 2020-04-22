@@ -1,12 +1,15 @@
 package it.objectmethod.loobia.entity;
 
 import java.sql.Date;
-
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -42,8 +45,11 @@ public class Product {
 	private String fornitore;
 	@Column(name = "giacenza")
 	private String giacenza;
-	@Column(name = "id_tipo_prod")
-	private Long idTipoProd;
+
+	@ManyToOne()
+	@JoinColumn(name = "id_tipo_prod")
+	private ProductType productType;
+
 	@Column(name = "immagine")
 	private String immagine;
 	@Column(name = "linea")
@@ -82,6 +88,9 @@ public class Product {
 	private String descrizioneBreve;
 	@Column(name = "path_brochure")
 	private String pathBrochure;
+
+	@OneToMany(mappedBy = "product")
+	private List<OrderDetails> detailOrders;
 
 	public Integer getId() {
 		return id;
@@ -195,12 +204,12 @@ public class Product {
 		this.giacenza = giacenza;
 	}
 
-	public Long getIdTipoProd() {
-		return idTipoProd;
+	public ProductType getProductType() {
+		return productType;
 	}
 
-	public void setIdTipoProd(Long idTipoProd) {
-		this.idTipoProd = idTipoProd;
+	public void setProductType(ProductType productType) {
+		this.productType = productType;
 	}
 
 	public String getImmagine() {
@@ -353,6 +362,14 @@ public class Product {
 
 	public void setPathBrochure(String pathBrochure) {
 		this.pathBrochure = pathBrochure;
+	}
+
+	public List<OrderDetails> getDetailOrders() {
+		return detailOrders;
+	}
+
+	public void setDetailOrders(List<OrderDetails> detailOrders) {
+		this.detailOrders = detailOrders;
 	}
 
 }

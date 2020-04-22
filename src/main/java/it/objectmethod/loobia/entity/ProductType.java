@@ -1,10 +1,13 @@
 package it.objectmethod.loobia.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +20,9 @@ public class ProductType {
 	private Long id;
 	@Column(name = "descrizione")
 	private String descrizione;
+	
+	@OneToMany(mappedBy = "productType")
+	private List<Product> productList;
 
 	public Long getId() {
 		return id;

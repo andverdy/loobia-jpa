@@ -7,5 +7,5 @@ import it.objectmethod.loobia.entity.PaymentConditions;
 
 public interface PaymentConditionsRepository extends JpaRepository<PaymentConditions, Long> {
 
-	PaymentConditions findSpesById(@Param("id") Long id);
+	PaymentConditions findSpesaById(@Param("id") Long id);
 }

@@ -1,10 +1,13 @@
 package it.objectmethod.loobia.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +26,9 @@ public class PaymentConditions {
 	private Float spesa;
 	@Column(name = "attivo")
 	private boolean attivo;
+
+	@OneToMany(mappedBy = "paymentConditions")
+	private List<Order> Order;
 
 	public Long getId() {
 		return id;
@@ -62,6 +68,14 @@ public class PaymentConditions {
 
 	public void setAttivo(boolean attivo) {
 		this.attivo = attivo;
+	}
+
+	public List<Order> getOrder() {
+		return Order;
+	}
+
+	public void setOrder(List<Order> order) {
+		Order = order;
 	}
 
 }

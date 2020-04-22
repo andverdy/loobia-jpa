@@ -69,6 +69,9 @@ public class Customer {
 	@OneToMany(mappedBy = "customer")
 	private List<CustomerAddresses> customerAddresses;
 
+	@OneToMany(mappedBy = "customerOrder")
+	private List<Order> order;
+
 	public Integer getId() {
 		return id;
 	}
@@ -259,6 +262,14 @@ public class Customer {
 
 	public void setCustomerAddresses(List<CustomerAddresses> customerAddresses) {
 		this.customerAddresses = customerAddresses;
+	}
+
+	public List<Order> getOrder() {
+		return order;
+	}
+
+	public void setOrder(List<Order> order) {
+		this.order = order;
 	}
 
 }

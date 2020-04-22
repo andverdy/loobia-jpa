@@ -5,9 +5,9 @@ import java.util.List;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import it.objectmethod.loobia.entity.CommissionDetailCopy;
 
-public class CommissionCopyDto {
+
+public class OrderDto {
 
 	private Integer id;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -27,7 +27,7 @@ public class CommissionCopyDto {
 	private Float importoTot;
 	private Float importoTotScontato;
 	private Float spesaIncasso;
-	private List<CommissionDetailCopy> commissionDetailCopy;
+	private List<OrderDetailDto> detailOrdersDto;
 
 	public Integer getId() {
 		return id;
@@ -157,12 +157,12 @@ public class CommissionCopyDto {
 		this.spesaIncasso = spesaIncasso;
 	}
 
-	public List<CommissionDetailCopy> getCommissionDetailCopy() {
-		return commissionDetailCopy;
+	public List<OrderDetailDto> getDetailOrdersDto() {
+		return detailOrdersDto;
 	}
 
-	public void setCommissionDetailCopy(List<CommissionDetailCopy> commissionDetailCopy) {
-		this.commissionDetailCopy = commissionDetailCopy;
+	public void setDetailOrdersDto(List<OrderDetailDto> detailOrdersDto) {
+		this.detailOrdersDto = detailOrdersDto;
 	}
 
 }

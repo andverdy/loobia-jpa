@@ -1,45 +1,16 @@
-package it.objectmethod.loobia.entity;
+package it.objectmethod.loobia.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+public class OrderDetailDto {
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-@Entity
-@Table(name = "copia_commissione_dettaglio")
-public class CommissionDetailCopy {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private Integer id;
-	@Column(name = "sconto")
 	private Integer sconto;
-	@Column(name = "tot_pezzi")
 	private Integer totPezzi;
-	@Column(name = "id_prodotto")
 	private Integer idProdotto;
-	@Column(name = "prezzo_singolo")
 	private Float prezzoSingolo;
-	@Column(name = "importo")
 	private Double importo;
-	@Column(name = "importo_scontato")
 	private Double importoScontato;
-	@Column(name = "evaso")
 	private Integer evaso;
-	@Column(name = "pezzi_inviati")
 	private Integer pezziInviati;
-
-	@JsonBackReference
-	@ManyToOne()
-	@JoinColumn(name = "id_copia_commissione")
-	private CommissionCopy commissionCopy;
 
 	public Integer getId() {
 		return id;
@@ -111,14 +82,6 @@ public class CommissionDetailCopy {
 
 	public void setPezziInviati(Integer pezziInviati) {
 		this.pezziInviati = pezziInviati;
-	}
-
-	public CommissionCopy getCommissionCopy() {
-		return commissionCopy;
-	}
-
-	public void setCommissionCopy(CommissionCopy commissionCopy) {
-		this.commissionCopy = commissionCopy;
 	}
 
 }
