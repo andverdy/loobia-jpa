@@ -11,7 +11,6 @@ import it.objectmethod.loobia.repository.CustomerRepository;
 import it.objectmethod.loobia.repository.PaymentConditionsRepository;
 import it.objectmethod.loobia.repository.ProductRepository;
 import it.objectmethod.loobia.validator.rules.OrderCcdExistRule;
-import it.objectmethod.loobia.validator.rules.CustomerOrderRule;
 import it.objectmethod.loobia.validator.rules.OrderPayConditionRule;
 import it.objectmethod.loobia.validator.rules.OrderTotalAmountRule;
 
@@ -43,7 +42,7 @@ public class OrderValidator {
 		new OrderPayConditionRule().validate(params);
 		new OrderCcdExistRule().validate(params);
 		new OrderTotalAmountRule().validate(params);
-		new CustomerOrderRule().validate(params);
+		// new CustomerOrderRule().validate(params);
 
 		return errors;
 	}

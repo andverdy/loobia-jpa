@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,8 +50,11 @@ public class Order {
 	private Byte mezzoConsegnaVettore;
 	@Column(name = "id_indirizzi_cliente")
 	private Integer idIndirizziCliente;
-	@Column(name = "id_agente")
-	private Long idAgente;
+
+	@ManyToOne()
+	@JoinColumn(name = "id_agente")
+	private Area area;
+
 	@Column(name = "ragione_sociale_cliente")
 	private String ragioneSocialeCliente;
 	@Column(name = "esportato")
@@ -67,7 +69,7 @@ public class Order {
 	private Float spesaIncasso;
 
 	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "order")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "order")
 	private List<OrderDetails> detailOrders;
 
 	public Integer getId() {
@@ -142,12 +144,12 @@ public class Order {
 		this.idIndirizziCliente = idIndirizziCliente;
 	}
 
-	public Long getIdAgente() {
-		return idAgente;
+	public Area getArea() {
+		return area;
 	}
 
-	public void setIdAgente(Long idAgente) {
-		this.idAgente = idAgente;
+	public void setArea(Area area) {
+		this.area = area;
 	}
 
 	public String getRagioneSocialeCliente() {

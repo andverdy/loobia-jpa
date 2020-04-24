@@ -17,4 +17,7 @@ public interface AreaRepository extends JpaRepository<Area, Integer> {
 	@Query(value = "select z.codice_zona from zona as z  where z.id_agente = :idUtente", nativeQuery = true)
 	List<String> findAllCodZonaById(@Param("idUtente") Integer idUtente);
 
+	
+	@Query(value = "select * from zona where id = :idAgente", nativeQuery = true)
+	Area findById(@Param("idAgente") Long IdAgente);
 }

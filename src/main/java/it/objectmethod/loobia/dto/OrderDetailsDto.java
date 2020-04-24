@@ -1,11 +1,11 @@
 package it.objectmethod.loobia.dto;
 
-public class OrderDetailDto {
+public class OrderDetailsDto {
 
 	private Integer id;
 	private Integer sconto;
 	private Integer totPezzi;
-	private Integer idProdotto;
+	private Long idProdotto;
 	private Float prezzoSingolo;
 	private Double importo;
 	private Double importoScontato;
@@ -36,11 +36,11 @@ public class OrderDetailDto {
 		this.totPezzi = totPezzi;
 	}
 
-	public Integer getIdProdotto() {
+	public Long getIdProdotto() {
 		return idProdotto;
 	}
 
-	public void setIdProdotto(Integer idProdotto) {
+	public void setIdProdotto(Long idProdotto) {
 		this.idProdotto = idProdotto;
 	}
 

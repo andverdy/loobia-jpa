@@ -7,13 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
-import it.objectmethod.loobia.dto.OrderDetailDto;
+import it.objectmethod.loobia.dto.OrderDetailsDto;
 import it.objectmethod.loobia.dto.OrderDto;
+import it.objectmethod.loobia.entity.Area;
 import it.objectmethod.loobia.entity.Customer;
 import it.objectmethod.loobia.entity.Order;
 import it.objectmethod.loobia.entity.OrderDetails;
 import it.objectmethod.loobia.entity.PaymentConditions;
 import it.objectmethod.loobia.entity.Product;
+import it.objectmethod.loobia.repository.AreaRepository;
 import it.objectmethod.loobia.repository.CustomerRepository;
 import it.objectmethod.loobia.repository.PaymentConditionsRepository;
 import it.objectmethod.loobia.repository.ProductRepository;
@@ -22,7 +24,7 @@ import it.objectmethod.loobia.repository.ProductRepository;
 public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 
 	@Autowired
-	private OrderDetailMapper orderDetailMapper;
+	private OrderDetailsMapper orderDetailMapper;
 
 	@Autowired
 	private CustomerRepository customerRepo;
@@ -33,6 +35,9 @@ public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 	@Autowired
 	private ProductRepository productRepo;
 
+	@Autowired
+	private AreaRepository areaRepo;
+
 	@Override
 	public Order toEntity(OrderDto dto) {
 		if (dto == null) {
@@ -41,6 +46,7 @@ public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 
 		Order order = new Order();
 		order.setDetailOrders(orderDetailMapper.toEntity(dto.getDetailOrdersDto()));
+		Area area = areaRepo.findById(dto.getIdAgente());
 
 		Customer customer = new Customer();
 		try {
@@ -61,7 +67,6 @@ public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 		order.setEsportato(dto.getEsportato());
 		order.setEvaso(dto.getEvaso());
 		order.setId(dto.getId());
-		order.setIdAgente(dto.getIdAgente());
 		order.setIdIndirizziCliente(dto.getIdIndirizziCliente());
 		order.setImportoTot(dto.getImportoTot());
 		order.setImportoTotScontato(dto.getImportoTotScontato());
@@ -73,17 +78,16 @@ public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 		order.setStato(dto.getStato());
 		order.setCustomerOrder(customer);
 		order.setPaymentConditions(payCond);
+		order.setArea(area);
 
 		List<OrderDetails> orderDet = order.getDetailOrders();
 		for (int i = 0; i < orderDet.size(); i++) {
 			if (orderDet.get(i).getOrder() == null) {
-				Product product = productRepo.findById(dto.getDetailOrdersDto().get(i).getIdProdotto()).get();
+				Product product = productRepo.findById(dto.getDetailOrdersDto().get(i).getIdProdotto());
 				orderDet.get(i).setProduct(product);
 				orderDet.get(i).setOrder(order);
 			}
-
 		}
-
 		return order;
 	}
 
@@ -94,6 +98,8 @@ public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 		}
 
 		OrderDto orderDto = new OrderDto();
+		Integer idAgenteInteger = entity.getArea().getUser().getIdUtente();
+		Long idAgenteLong = Long.valueOf(idAgenteInteger);
 
 		orderDto.setIdCliente(entityCustomerOrderId(entity));
 		orderDto.setIdCondizioniPagamento(entityPaymentConditionsId(entity));
@@ -105,7 +111,7 @@ public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 		orderDto.setNumero(entity.getNumero());
 		orderDto.setMezzoConsegnaVettore(entity.getMezzoConsegnaVettore());
 		orderDto.setIdIndirizziCliente(entity.getIdIndirizziCliente());
-		orderDto.setIdAgente(entity.getIdAgente());
+		orderDto.setIdAgente(idAgenteLong);
 		orderDto.setRagioneSocialeCliente(entity.getRagioneSocialeCliente());
 		orderDto.setEsportato(entity.getEsportato());
 		orderDto.setEvaso(entity.getEvaso());
@@ -113,7 +119,7 @@ public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 		orderDto.setImportoTotScontato(entity.getImportoTotScontato());
 		orderDto.setSpesaIncasso(entity.getSpesaIncasso());
 
-		List<OrderDetailDto> orderDetDto = orderDto.getDetailOrdersDto();
+		List<OrderDetailsDto> orderDetDto = orderDto.getDetailOrdersDto();
 		for (int i = 0; i < orderDetDto.size(); i++) {
 
 			orderDto.getDetailOrdersDto().get(i).setIdProdotto(entity.getDetailOrders().get(i).getProduct().getId());

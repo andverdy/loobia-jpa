@@ -8,7 +8,7 @@ import it.objectmethod.loobia.entity.OrderDetails;
 import it.objectmethod.loobia.repository.ProductRepository;
 
 @SuppressWarnings("unchecked")
-public class OrderDetailSinglePriceRule implements IValidatorRule {
+public class OrderDetailsSinglePriceRule implements IValidatorRule {
 
 	@Override
 	public void validate(Map<String, Object> paramsToValidate) {

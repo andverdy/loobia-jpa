@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import it.objectmethod.loobia.entity.Order;
 import it.objectmethod.loobia.repository.ProductRepository;
-import it.objectmethod.loobia.validator.rules.OrderDetailAmountRule;
-import it.objectmethod.loobia.validator.rules.OrderDetailDiscountRule;
-import it.objectmethod.loobia.validator.rules.OrderDetailSinglePriceRule;
+import it.objectmethod.loobia.validator.rules.OrderDetailsAmountRule;
+import it.objectmethod.loobia.validator.rules.OrderDetailsDiscountRule;
+import it.objectmethod.loobia.validator.rules.OrderDetailsSinglePriceRule;
 
 @Component
 public class OrderDetailValidator {
@@ -25,9 +25,9 @@ public class OrderDetailValidator {
 		params.put("order", order);
 		params.put("productRepo", productRepo);
 
-		new OrderDetailSinglePriceRule().validate(params);
-		new OrderDetailDiscountRule().validate(params);
-		new OrderDetailAmountRule().validate(params);
+		new OrderDetailsSinglePriceRule().validate(params);
+		new OrderDetailsDiscountRule().validate(params);
+		new OrderDetailsAmountRule().validate(params);
 
 		return errors;
 	}

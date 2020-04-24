@@ -27,7 +27,7 @@ public class OrderDto {
 	private Float importoTot;
 	private Float importoTotScontato;
 	private Float spesaIncasso;
-	private List<OrderDetailDto> detailOrdersDto;
+	private List<OrderDetailsDto> detailOrdersDto;
 
 	public Integer getId() {
 		return id;
@@ -157,11 +157,11 @@ public class OrderDto {
 		this.spesaIncasso = spesaIncasso;
 	}
 
-	public List<OrderDetailDto> getDetailOrdersDto() {
+	public List<OrderDetailsDto> getDetailOrdersDto() {
 		return detailOrdersDto;
 	}
 
-	public void setDetailOrdersDto(List<OrderDetailDto> detailOrdersDto) {
+	public void setDetailOrdersDto(List<OrderDetailsDto> detailOrdersDto) {
 		this.detailOrdersDto = detailOrdersDto;
 	}
 

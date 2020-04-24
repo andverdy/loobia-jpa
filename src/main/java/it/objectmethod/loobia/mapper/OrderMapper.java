@@ -6,7 +6,7 @@ import org.mapstruct.Mapping;
 import it.objectmethod.loobia.dto.OrderDto;
 import it.objectmethod.loobia.entity.Order;
 
-@Mapper(componentModel = "spring", uses = { OrderDetailMapper.class, CustomerMapper.class,
+@Mapper(componentModel = "spring", uses = { OrderDetailsMapper.class, CustomerMapper.class,
 		PaymentConditionsMapper.class })
 public interface OrderMapper extends EntityMapper<OrderDto, Order> {
 
