@@ -2,24 +2,23 @@ package it.objectmethod.loobia.validator.rules;
 
 import java.util.List;
 import java.util.Map;
-
-import it.objectmethod.loobia.entity.Order;
-import it.objectmethod.loobia.entity.OrderDetails;
+import it.objectmethod.loobia.dto.OrderDetailsDto;
+import it.objectmethod.loobia.dto.OrderDto;
 
 @SuppressWarnings("unchecked")
 public class OrderDetailsDiscountRule implements IValidatorRule {
 
 	@Override
 	public void validate(Map<String, Object> paramsToValidate) {
-		Order order = (Order) paramsToValidate.get("order");
+		OrderDto orderDto = (OrderDto) paramsToValidate.get("orderDto");
 		List<String> errors = (List<String>) paramsToValidate.get("errList");
 
-		List<OrderDetails> commissionDetailCopyList = null;
-		if (order != null) {
+		List<OrderDetailsDto> orderDetailList = null;
+		if (orderDto != null) {
 
-			commissionDetailCopyList = order.getDetailOrders();
-			if (commissionDetailCopyList != null) {
-				for (OrderDetails cdc : commissionDetailCopyList) {
+			orderDetailList = orderDto.getDetailOrdersDto();
+			if (orderDetailList != null) {
+				for (OrderDetailsDto cdc : orderDetailList) {
 					if (cdc.getSconto() > 100) {
 						errors.add("Non è possibile inserire uno sconto maggiore del 100%");
 					}

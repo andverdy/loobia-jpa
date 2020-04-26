@@ -2,8 +2,7 @@ package it.objectmethod.loobia.validator.rules;
 
 import java.util.List;
 import java.util.Map;
-
-import it.objectmethod.loobia.entity.Order;
+import it.objectmethod.loobia.dto.OrderDto;
 
 @SuppressWarnings("unchecked")
 public class OrderCcdExistRule implements IValidatorRule {
@@ -12,10 +11,10 @@ public class OrderCcdExistRule implements IValidatorRule {
 	public void validate(Map<String, Object> paramsToValidate) {
 
 		List<String> errors = (List<String>) paramsToValidate.get("errList");
-		Order order = (Order) paramsToValidate.get("order");
+		OrderDto orderDto = (OrderDto) paramsToValidate.get("orderDto");
 
-		if (order != null) {
-			if (order.getDetailOrders() == null || order.getDetailOrders().isEmpty()) {
+		if (orderDto != null) {
+			if (orderDto.getDetailOrdersDto() == null || orderDto.getDetailOrdersDto().isEmpty()) {
 				errors.add("Errore, deve esistere almeno una CCD");
 			}
 		}

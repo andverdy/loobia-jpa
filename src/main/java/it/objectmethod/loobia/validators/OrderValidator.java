@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import it.objectmethod.loobia.entity.Order;
+import it.objectmethod.loobia.dto.OrderDto;
 import it.objectmethod.loobia.repository.CustomerRepository;
 import it.objectmethod.loobia.repository.PaymentConditionsRepository;
 import it.objectmethod.loobia.repository.ProductRepository;
+import it.objectmethod.loobia.validator.rules.CustomerOrderRule;
 import it.objectmethod.loobia.validator.rules.OrderCcdExistRule;
 import it.objectmethod.loobia.validator.rules.OrderPayConditionRule;
 import it.objectmethod.loobia.validator.rules.OrderTotalAmountRule;
@@ -29,11 +30,11 @@ public class OrderValidator {
 	@Autowired
 	private ProductRepository productRepo;
 
-	public List<String> orderValidator(Order order) {
+	public List<String> orderValidator(OrderDto orderDto) {
 		List<String> errors = new ArrayList<String>();
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("errList", errors);
-		params.put("order", order);
+		params.put("orderDto", orderDto);
 		params.put("paymentConditionRepo", paymentConditionRepo);
 		params.put("customerRepo", customerRepo);
 		params.put("paymConditionRepo", paymConditionRepo);
@@ -42,7 +43,7 @@ public class OrderValidator {
 		new OrderPayConditionRule().validate(params);
 		new OrderCcdExistRule().validate(params);
 		new OrderTotalAmountRule().validate(params);
-		// new CustomerOrderRule().validate(params);
+		new CustomerOrderRule().validate(params);
 
 		return errors;
 	}

@@ -3,10 +3,7 @@ package it.objectmethod.loobia.mapper;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
-
 import it.objectmethod.loobia.dto.OrderDetailsDto;
 import it.objectmethod.loobia.dto.OrderDto;
 import it.objectmethod.loobia.entity.Area;
@@ -21,7 +18,7 @@ import it.objectmethod.loobia.repository.PaymentConditionsRepository;
 import it.objectmethod.loobia.repository.ProductRepository;
 
 @Component
-public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
+public class OrderMapperCustomized {
 
 	@Autowired
 	private OrderDetailsMapper orderDetailMapper;
@@ -38,30 +35,16 @@ public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 	@Autowired
 	private AreaRepository areaRepo;
 
-	@Override
 	public Order toEntity(OrderDto dto) {
 		if (dto == null) {
 			return null;
 		}
-
 		Order order = new Order();
 		order.setDetailOrders(orderDetailMapper.toEntity(dto.getDetailOrdersDto()));
 		Area area = areaRepo.findById(dto.getIdAgente());
-
-		Customer customer = new Customer();
-		try {
-			customer = customerRepo.findById(dto.getIdCliente()).get();
-		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Il cliente inserito non esiste!");
-		}
-
-		PaymentConditions payCond;
-		try {
-			payCond = payCondRepo.findById(dto.getIdCondizioniPagamento()).get();
-		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-					"Non esiste una condizione pagamento con l'id inserito!");
-		}
+		Customer customer = customerRepo.findById(dto.getIdCliente()).get();
+		List<OrderDetails> orderDet = order.getDetailOrders();
+		PaymentConditions payCond = payCondRepo.findById(dto.getIdCondizioniPagamento()).get();
 
 		order.setData(dto.getData());
 		order.setEsportato(dto.getEsportato());
@@ -80,7 +63,6 @@ public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 		order.setPaymentConditions(payCond);
 		order.setArea(area);
 
-		List<OrderDetails> orderDet = order.getDetailOrders();
 		for (int i = 0; i < orderDet.size(); i++) {
 			if (orderDet.get(i).getOrder() == null) {
 				Product product = productRepo.findById(dto.getDetailOrdersDto().get(i).getIdProdotto());
@@ -91,12 +73,10 @@ public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 		return order;
 	}
 
-	@Override
 	public OrderDto toDto(Order entity) {
 		if (entity == null) {
 			return null;
 		}
-
 		OrderDto orderDto = new OrderDto();
 		Integer idAgenteInteger = entity.getArea().getUser().getIdUtente();
 		Long idAgenteLong = Long.valueOf(idAgenteInteger);
@@ -118,14 +98,10 @@ public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 		orderDto.setImportoTot(entity.getImportoTot());
 		orderDto.setImportoTotScontato(entity.getImportoTotScontato());
 		orderDto.setSpesaIncasso(entity.getSpesaIncasso());
-
 		List<OrderDetailsDto> orderDetDto = orderDto.getDetailOrdersDto();
 		for (int i = 0; i < orderDetDto.size(); i++) {
-
 			orderDto.getDetailOrdersDto().get(i).setIdProdotto(entity.getDetailOrders().get(i).getProduct().getId());
-
 		}
-
 		return orderDto;
 	}
 
@@ -157,18 +133,6 @@ public class OrderMapperCustom implements EntityMapper<OrderDto, Order> {
 			return null;
 		}
 		return id;
-	}
-
-	@Override
-	public List<Order> toEntity(List<OrderDto> dtoList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<OrderDto> toDto(List<Order> entityList) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
