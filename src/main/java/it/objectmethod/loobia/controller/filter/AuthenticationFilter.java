@@ -51,7 +51,8 @@ public class AuthenticationFilter implements Filter {
 			if (email != null) {
 				if (user.getRole().equals("AGENT")) {
 					if (url.contains("api/customer") || url.contains("api/municipality")
-							|| url.contains("api/customer_addresses") | url.contains("api/order")) {
+							|| url.contains("api/customer_addresses") | url.contains("api/order")
+							|| url.contains("api/download")) {
 						authorized = true;
 					}
 				} else if (user.getRole().equals("ADMIN")) {
