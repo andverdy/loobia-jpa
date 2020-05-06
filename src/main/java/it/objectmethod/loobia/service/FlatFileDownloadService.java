@@ -18,7 +18,7 @@ import it.objectmethod.loobia.entity.OrderDetails;
 import it.objectmethod.loobia.repository.OrderRepository;
 
 @Component
-public class FileDownloadService {
+public class FlatFileDownloadService {
 
 	@Autowired
 	private OrderRepository orderRepo;
@@ -26,7 +26,7 @@ public class FileDownloadService {
 	@Value("${order.filename}")
 	private String fileNamePath;
 
-	public File generateFile(Integer id, HttpServletRequest request) {
+	public File flatFileGenerate(Integer id, HttpServletRequest request) {
 		Order order = orderRepo.findById(id).get();
 		File file = null;
 		if (order != null) {

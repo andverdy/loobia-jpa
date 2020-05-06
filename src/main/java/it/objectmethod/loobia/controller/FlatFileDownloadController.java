@@ -6,22 +6,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import it.objectmethod.loobia.service.FileDownloadService;
+import it.objectmethod.loobia.service.FlatFileDownloadService;
 import java.io.IOException;
 import java.io.InputStream;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/api/download")
-public class FileDownloadController {
+public class FlatFileDownloadController {
 
 	@Autowired
-	private FileDownloadService fileDownlService;
+	private FlatFileDownloadService fileDownlService;
 
 	@GetMapping("/flat-file")
-	public void getSteamingFile1(HttpServletResponse response, HttpServletRequest request,
+	public void flatFileDownload(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value = "id") Integer id) throws IOException {
-		File file = fileDownlService.generateFile(id, request);
+		File file = fileDownlService.flatFileGenerate(id, request);
 		String fileNamePath = (String) request.getAttribute("fileName");
 
 		if (file != null) {
