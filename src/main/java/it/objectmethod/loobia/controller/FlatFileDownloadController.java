@@ -33,8 +33,6 @@ public class FlatFileDownloadController {
 			while ((nRead = inputStream.read()) != -1) {
 				response.getWriter().write(nRead);
 			}
-
 		}
-
 	}
 }

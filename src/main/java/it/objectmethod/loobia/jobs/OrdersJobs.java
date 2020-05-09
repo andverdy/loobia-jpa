@@ -57,6 +57,7 @@ public class OrdersJobs {
 							+ finalDataForExtensionFile + totAmount + totAmountDiscount);
 					// Codice relativo alla costruzione e inserimento delle righe dei dettagli
 					List<OrderDetails> listOrderDet = order.getDetailOrders();
+					
 					for (OrderDetails orderDetails : listOrderDet) {
 						String idProd = Long.toString(orderDetails.getProduct().getId());
 						String descrizione = orderDetails.getProduct().getDescrizione();
